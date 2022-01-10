@@ -8,8 +8,17 @@ class AuthService {
     // const provider = new firebase.auth.GoogleAuthProvider();
     // Object['key']를 이용해서 인자를 받아오는것 같다.
     const authProvider = new firebase.auth[`${providerName}AuthProvider`]();
-    console.log(authProvider, "provider");
     return firebaseApp.auth().signInWithPopup(authProvider);
+  }
+
+  logout() {
+    firebase.auth().signOut();
+  }
+
+  onAuthChange(onUserChanged) {
+    firebase.auth().onAuthStateChanged((user) => {
+      onUserChanged(user);
+    });
   }
 }
 
