@@ -6,7 +6,7 @@ import Header from "../header/header";
 import Preview from "../preview/preview";
 import styles from "./maker.module.css";
 
-const Maker = ({ authService }) => {
+const Maker = ({ FileInput, authService }) => {
   // useState([ ... ]) 배열안에 객체를 담아서 map()을 이용하여 객체를 브라우저 화면에 뿌려줬었다.
   // 하지만, 상태를 업데이트 할때, 주기적으로 발생하는 이벤트에 map()을 이용하면 성능에 매우 좋지 않습니다.
   // {} 안에 'key' : {객체} 를 만들어서 불러온 다면 object['key'] : value를 이용해서 성능을 향상 시킬 수 있습니다.
@@ -21,8 +21,8 @@ const Maker = ({ authService }) => {
       title: "Frontend Engineer",
       email: "oms@naver.com",
       message: "Go for it",
-      fileName: "oms",
-      fileURL: null,
+      fileName: "munseok",
+      fileURL: "../../images/munseok.jpg",
     },
 
     2: {
@@ -33,8 +33,8 @@ const Maker = ({ authService }) => {
       title: "Frontend Engineer",
       email: "jjona@naver.com",
       message: "Go for it",
-      fileName: "jjona",
-      fileURL: "jjona.png",
+      fileName: null,
+      fileURL: null,
     },
 
     3: {
@@ -45,7 +45,7 @@ const Maker = ({ authService }) => {
       title: "Frontend Engineer",
       email: "seok@naver.com",
       message: "Go for it",
-      fileName: "seok",
+      fileName: null,
       fileURL: null,
     },
   });
@@ -100,6 +100,7 @@ const Maker = ({ authService }) => {
       <Header onLogout={onLogout} />
       <div className={styles.container}>
         <Editor
+          FileInput={FileInput}
           cards={cards}
           addCard={createOrUpdateCard}
           updateCard={createOrUpdateCard}
