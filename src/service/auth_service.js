@@ -1,24 +1,35 @@
 // import import firebase from "firebase/app";으로 해주면 authProvider값을 읽어오지 못한다.
-import firebase from "firebase";
-import firebaseApp from "./firebase";
+import { firebaseAuth, githubPorvider, googleProvider } from "./firebase";
 
 class AuthService {
   login(providerName) {
     // Firebase AuthProvider 생성자 생성 예시
     // const provider = new firebase.auth.GoogleAuthProvider();
     // Object['key']를 이용해서 인자를 받아오는것 같다.
-    const authProvider = new firebase.auth[`${providerName}AuthProvider`]();
-    return firebaseApp.auth().signInWithPopup(authProvider);
+    const authProvider = this.getProvider(providerName);
+    return firebaseAuth.signInWithPopup(authProvider);
   }
 
   logout() {
-    firebase.auth().signOut();
+    firebaseAuth.signOut();
   }
 
   onAuthChange(onUserChanged) {
-    firebase.auth().onAuthStateChanged((user) => {
+    firebaseAuth.onAuthStateChanged((user) => {
       onUserChanged(user);
     });
+  }
+
+  getProvider(providerName) {
+    switch (providerName) {
+      case "Google":
+        return googleProvider;
+
+      case "Github":
+        return githubPorvider;
+      default:
+        throw new Error(`not supported provider: ${providerName}`);
+    }
   }
 }
 
