@@ -1,7 +1,7 @@
-import React from "react";
+import React, { memo } from "react";
 import styles from "./card.module.css";
 
-const Card = ({ card }) => {
+const Card = memo(({ card }) => {
   const DEFAULT_IMAGE = "/images/default_logo.png";
   const { name, company, title, email, message, theme, fileName, fileURL } =
     card;
@@ -18,7 +18,7 @@ const Card = ({ card }) => {
       </div>
     </li>
   );
-};
+});
 
 // 각각의 카드의 배경색이 다르기 때문에 theme에 따라 배경이 다른 함수를 만들어줍니다.
 function getStyles(theme) {

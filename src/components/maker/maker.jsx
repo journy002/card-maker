@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Editor from "../editor/editor";
 import Footer from "../footer/footer";
@@ -57,9 +57,10 @@ const Maker = ({ FileInput, authService, cardRepository }) => {
   const history = useNavigate();
 
   // Logout func
-  const onLogout = () => {
+  // 함수 컴포넌트에서 함수가 계속 호출이 되어도 동일한 데이터를 사용하려면 useCallback()을 사용해줘야 합니다.
+  const onLogout = useCallback(() => {
     authService.logout();
-  };
+  }, [authService]);
 
   useEffect(() => {
     if (!userId) {

@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import { useRef } from "react/cjs/react.development";
 import styles from "./image_file_input.module.css";
 
-const ImageFileInput = ({ imageUploader, name, onFileChange }) => {
+const ImageFileInput = memo(({ imageUploader, name, onFileChange }) => {
   // 로딩스피너 //
   const [loading, setLoading] = useState(false); // 처음엔 로딩이 되지 않으니 false값을 기본으로 설정
 
@@ -52,6 +52,6 @@ const ImageFileInput = ({ imageUploader, name, onFileChange }) => {
       {loading && <div className={styles.loading}></div>}
     </div>
   );
-};
+});
 
 export default ImageFileInput;
